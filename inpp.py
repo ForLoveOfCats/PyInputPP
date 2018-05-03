@@ -8,22 +8,29 @@ See example.py for an example usage case.'''
 import pygame
 
 
-class Controller:  # Main class containing all internal data and all functions for external use.
-    # The two classes below contain functions which return data to be used for binding keys and events.
+class Controller:
+    """Main class containing all internal data and all functions for external use."""
 
-    class _Events:  # This class contains all one off events.
+    class _Events:
+        """Contains all one off events."""
         def __init__(self, controller):
             self.controller = controller
 
-        def key(self, button):  # Takes an integer and return a boolean.
-            # Tests if the supplied integer matches the integer code for any keydown events and returns a boolean accordingly.
+
+        def key(self, button):
+            """Takes an integer and return a boolean.
+
+            Tests if the supplied integer matches the integer code for any keydown events and returns a boolean accordingly."""
             if not isinstance(button, int):
                 raise TypeError('''"%s" is not a valid input. Integer required''' % (button))
             return button in self.controller._triggered
 
-        def mouse(self, button):  # Takes a string and returns a boolean.
-            # Possible inputs are "Left", "Middle", and "Right".
-            # Tests if the specified mouse button fired a press down event and returns a boolean accordingly.
+
+        def mouse(self, button):
+            """Takes a string and returns a boolean.
+
+            Possible inputs are "Left", "Middle", and "Right".
+            Tests if the specified mouse button fired a press down event and returns a boolean accordingly."""
             if not isinstance(button, str):
                 raise TypeError('''"%s" is not a valid input. String required''' % (button))
 
@@ -41,9 +48,12 @@ class Controller:  # Main class containing all internal data and all functions f
 
             return False
 
-        def scroll(self, direction):  # Takes a string and returns a boolean.
-            # Possible inputs are "Up" and "Down".
-            # Tests if mouse wheel scrolled in specified direction and returns a boolean accordingly.
+
+        def scroll(self, direction):
+            """Takes a string and returns a boolean.
+
+            Possible inputs are "Up" and "Down".
+            Tests if mouse wheel scrolled in specified direction and returns a boolean accordingly."""
             if not isinstance(direction, str):
                 raise TypeError('''"%s" is not a valid input. String required''' % (direction))
 
@@ -55,28 +65,40 @@ class Controller:  # Main class containing all internal data and all functions f
 
             return False
 
-        def quit(self):  # Takes no arguments and returns a boolean.
-            # Tests if a pygame.QUIT event ever took place and returns a boolean accordingly.
+
+        def quit(self):
+            """Takes no arguments and returns a boolean.
+
+            Tests if a pygame.QUIT event ever took place and returns a boolean accordingly."""
             return self.controller._quit
 
-        def raw(self):  # Takes no arguments and returns a string of pygame events.
+
+        def raw(self):
+            """Takes no arguments and returns a list of pygame events."""
             return self.controller._raw
 
 
 
-    class _Repeats:  # This class contains all events that can span multiple updates.
+    class _Repeats:
+        """Contains all events that can span multiple updates."""
         def __init__(self, controller):
             self.controller = controller
 
-        def key(self, button):  # Takes an integer and return a boolean.
-            # Tests if the supplied integer matches the integer code for any keys that are currently depressed and returns a boolean accordingly.
+
+        def key(self, button):
+            """Takes an integer and return a boolean.
+
+            Tests if the supplied integer matches the integer code for any keys that are currently depressed and returns a boolean accordingly."""
             if not isinstance(button, int):
                 raise TypeError('''"%s" is not a valid input. Integer required''' % (button))
             return button in self.controller._held
 
-        def mouse(self, button):  # Takes a string and returns a boolean
-            # Possible inputs are "Left", "Middle", and "Right"
-            # Tests if the specified mouse button is currently depressed and returns a boolean accordingly.
+
+        def mouse(self, button):
+            """Takes a string and returns a boolean
+
+            Possible inputs are "Left", "Middle", and "Right"
+            Tests if the specified mouse button is currently depressed and returns a boolean accordingly."""
             if button == 'Left' and self.controller._mouse_held[0]:
                 return True
 
@@ -85,6 +107,7 @@ class Controller:  # Main class containing all internal data and all functions f
 
             if button == 'Right' and self.controller._mouse_held[2]:
                 return True
+
 
 
 
