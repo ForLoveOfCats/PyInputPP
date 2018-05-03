@@ -22,5 +22,7 @@
 
 I originally developed this library as an internal module for a game I was working on. The project required that different classes be able to handle their own input. I was also tired of working with the pygame event system. The event system is not bad it is just not always the best way to get input from the user. **This project does not exist to replace the event system.** In fact the entire list of events each frame is available via the ```controller.events.raw()``` function.
 
+See ```example.py``` for an example on usage of PyInput++
+
 
 # Bug Reports and Pull Requests are Welcome!
